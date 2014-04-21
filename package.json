@@ -1,0 +1,31 @@
+{
+  "name": "google-maps-examples",
+  "version": "0.0.1",
+  "description": "My Google Maps API playground.",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/infomaniac50/google-maps-api-examples.git"
+  },
+  "keywords": [
+    "map",
+    "google",
+    "javascript",
+    "web"
+  ],
+  "author": "Derek Chafin",
+  "license": "CC-BY-SA",
+  "bugs": {
+    "url": "https://github.com/infomaniac50/google-maps-api-examples/issues"
+  },
+  "homepage": "https://github.com/infomaniac50/google-maps-api-examples",
+  "dependencies": {
+    "adhoc": "^0.1.2"
+  }
+}
