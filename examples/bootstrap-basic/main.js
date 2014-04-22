@@ -24,7 +24,6 @@ $(function () {
 
     // Use the inverse ratio of the panel width.
     canvas.height(panel.outerWidth() * (1 / ratio));
-    console.log(canvas.height);
   }
 
   initialize();
