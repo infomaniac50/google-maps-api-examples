@@ -3,16 +3,9 @@ $(function () {
   var canvas;
   var panel;
 
-  function initialize() {
-    canvas = $("#map-canvas");
-    panel = $("#map-panel");
+  function initialize(canvasElem, options) {
+    map = new google.maps.Map(canvasElem, options);
 
-    var mapOptions = {
-      zoom: 10,
-      center: new google.maps.LatLng(39.188,-94.685)
-    };
-
-    map = new google.maps.Map(canvas[0], mapOptions);
     $(window).resize(onPageResize);
     onPageResize();
   }
@@ -35,6 +28,13 @@ $(function () {
     });
   }
 
-  initialize();
+  canvas = $("#map-canvas");
+  panel = $("#map-panel");
+
+  initialize(canvas[0], {
+    // zoom: 15,
+    // center: new google.maps.LatLng(39.188,-94.685)
+  });
+
   loadMapData("geo.json");
 });
