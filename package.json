@@ -2,13 +2,6 @@
   "name": "google-maps-examples",
   "version": "0.0.1",
   "description": "My Google Maps API playground.",
-  "main": "index.js",
-  "directories": {
-    "example": "examples"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/infomaniac50/google-maps-api-examples.git"
@@ -24,8 +17,12 @@
   "bugs": {
     "url": "https://github.com/infomaniac50/google-maps-api-examples/issues"
   },
-  "homepage": "https://github.com/infomaniac50/google-maps-api-examples",
-  "dependencies": {
-    "adhoc": "^0.1.2"
+  "devDependencies": {
+    "grunt-cli": "latest",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-jade": "~0.9.1",
+    "grunt-contrib-clean": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-contrib-connect": "latest"
   }
 }
