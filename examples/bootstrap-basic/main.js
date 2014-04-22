@@ -1,13 +1,18 @@
 $(function () {
   var map;
+  var canvas;
+  var panel;
 
-  function initialize(elem) {
+  function initialize() {
+    canvas = $("#map-canvas");
+    panel = $("#map-panel");
+
     var mapOptions = {
       zoom: 15,
       center: new google.maps.LatLng(39.188155,-94.685882)
     };
 
-    map = new google.maps.Map(elem, mapOptions);
+    map = new google.maps.Map(canvas[0], mapOptions);
     $(window).resize(onPageResize);
     onPageResize();
   }
@@ -18,8 +23,9 @@ $(function () {
     if (typeof(ratio) == "undefined") ratio = 1.30;
 
     // Use the inverse ratio of the panel width.
-    $("#map-canvas").height($("#map-panel").outerWidth() * (1 / ratio));
+    canvas.height(panel.outerWidth() * (1 / ratio));
+    console.log(canvas.height);
   }
 
-  initialize($("#map-canvas")[0]);
+  initialize();
 });
