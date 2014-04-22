@@ -40,6 +40,20 @@ module.exports = (grunt) ->
           ]
           dest: 'build/'
         }]
+      resource:
+        files: [{
+          expand: true
+          cwd: 'examples/'
+          src: [
+            '**/res/*.json'
+          ]
+          dest: 'build/'
+          rename: (dest, src) ->
+            console.log dest
+            console.log src
+            console.log path.normalize(path.join(dest, src.replace(/res/g, '')))
+            path.normalize(path.join(dest, src.replace(/res/g, '')))
+          }]
 
     watch:
       options:
@@ -54,6 +68,9 @@ module.exports = (grunt) ->
           'examples/**/*.html'
         ]
         tasks: ['copy:build']
+      resource:
+        files: ['examples/**/res/*.*']
+        tasks: ['copy:resource']
 
     connect:
       server:
@@ -66,6 +83,7 @@ module.exports = (grunt) ->
     'clean:build'
     'jade:compile'
     'copy:build'
+    'copy:resource'
   ]
 
   grunt.registerTask 'live', [
