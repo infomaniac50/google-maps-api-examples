@@ -12,9 +12,13 @@ $(function () {
     onPageResize();
   }
 
-  function onPageResize() {
-    // Reflow the map
-    $("#map-canvas").outerHeight(window.innerHeight);
+  // Reflow the map
+  function onPageResize(ratio) {
+    // Set defaults
+    if (typeof(ratio) == "undefined") ratio = 1.30;
+
+    // Use the inverse ratio of the panel width.
+    $("#map-canvas").height($("#map-panel").outerWidth() * (1 / ratio));
   }
 
   initialize($("#map-canvas")[0]);
