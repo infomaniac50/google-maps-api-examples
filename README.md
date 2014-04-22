@@ -1,6 +1,17 @@
 ## Google Maps API Examples
 My playground for the Google Maps API.
 
+### Examples
+##### You can play with the examples using the following:
+```bash
+npm install -g adhoc
+cd examples
+adhoc
+```
+
+### Developer Dependencies
+- [adhoc](https://www.npmjs.org/package/adhoc) - Start a web server in that directory. This instant! (like python -m SimpleHTTPServer on steroids)
+
 ### Authorship
 Derek Chafin  
 Github: @infomaniac50  
