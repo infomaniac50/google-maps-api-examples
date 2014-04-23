@@ -7,6 +7,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-jade'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-connect'
+  grunt.loadNpmTasks 'grunt-contrib-coffee'
 
   grunt.initConfig
     clean:
@@ -28,8 +29,20 @@ module.exports = (grunt) ->
           ext: '.html'
         }]
 
+    coffee:
+      compile:
+        files: [{
+          expand: true
+          cwd: 'examples/'
+          src: [
+            '**/*.coffee'
+          ]
+          dest: 'build/'
+          ext: '.js'
+        }]
+
     copy:
-      build:
+      static:
         files: [{
           expand: true
           cwd: 'examples/'
@@ -58,19 +71,20 @@ module.exports = (grunt) ->
     watch:
       options:
         livereload: true
-      templates:
-        files: ['examples/**/*.jade']
-        tasks: ['jade:compile']
+      compile:
+        files: [
+          'examples/**/*.jade'
+          'examples/**/*.coffee'
+        ]
+        tasks: ['compile']
       static:
         files:[
           'examples/**/*.js'
           'examples/**/*.css'
           'examples/**/*.html'
+          'examples/**/res/*.*'
         ]
-        tasks: ['copy:build']
-      resource:
-        files: ['examples/**/res/*.*']
-        tasks: ['copy:resource']
+        tasks: ['static']
 
     connect:
       server:
@@ -81,7 +95,16 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'default', [
     'clean:build'
+    'compile'
+    'copy'
+  ]
+
+  grunt.registerTask 'compile', [
     'jade:compile'
+    'coffee:compile'
+  ]
+
+  grunt.registerTask 'static', [
     'copy:build'
     'copy:resource'
   ]
