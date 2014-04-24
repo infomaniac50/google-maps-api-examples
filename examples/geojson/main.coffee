@@ -56,5 +56,5 @@ $ () ->
     # center: new google.maps.LatLng(39.188,-94.685)
   }
 
-  loadMapData "geo.json"
+  loadMapData "/ajax/geo.json"
 

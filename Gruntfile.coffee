@@ -69,17 +69,15 @@ module.exports = (grunt) ->
           ]
           dest: 'build/'
         }]
-      resource:
+      ajax:
         files: [{
           expand: true
           cwd: 'examples/'
           src: [
-            '**/res/*.json'
+            'ajax/*.json'
           ]
           dest: 'build/'
-          rename: (dest, src) ->
-            path.normalize(path.join(dest, src.replace(/res/g, '')))
-          }]
+        }]
 
     watch:
       options:
@@ -110,11 +108,11 @@ module.exports = (grunt) ->
           'examples/**/*.html'
         ]
         tasks: ['copy:html']
-      resource:
+      ajax:
         files:[
-          'examples/**/res/*.*'
+          'examples/ajax/*.json'
         ]
-        tasks: ['copy:resource']
+        tasks: ['copy:ajax']
 
     connect:
       server:
@@ -138,7 +136,7 @@ module.exports = (grunt) ->
     'copy:js'
     'copy:css'
     'copy:html'
-    'copy:resource'
+    'copy:ajax'
   ]
 
   grunt.registerTask 'live', [
