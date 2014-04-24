@@ -42,13 +42,29 @@ module.exports = (grunt) ->
         }]
 
     copy:
-      static:
+      js:
+        files: [{
+          expand: true
+          cwd: 'examples/'
+          src: [
+            '**/*.js'
+          ]
+          dest: 'build/'
+        }]
+      css:
         files: [{
           expand: true
           cwd: 'examples/'
           src: [
             '**/*.css'
-            '**/*.js'
+          ]
+          dest: 'build/'
+        }]
+      html:
+        files: [{
+          expand: true
+          cwd: 'examples/'
+          src: [
             '**/*.html'
           ]
           dest: 'build/'
@@ -68,20 +84,37 @@ module.exports = (grunt) ->
     watch:
       options:
         livereload: true
-      compile:
+      jade:
         files: [
           'examples/**/*.jade'
           'examples/**/*.coffee'
         ]
-        tasks: ['compile']
-      static:
+        tasks: ['jade:compile']
+      coffee:
+        files: [
+          'examples/**/*.coffee'
+        ]
+        tasks: ['coffee:compile']
+      js:
         files:[
           'examples/**/*.js'
+        ]
+        tasks: ['copy:js']
+      css:
+        files:[
           'examples/**/*.css'
+        ]
+        tasks: ['copy:css']
+      html:
+        files:[
           'examples/**/*.html'
+        ]
+        tasks: ['copy:html']
+      resource:
+        files:[
           'examples/**/res/*.*'
         ]
-        tasks: ['static']
+        tasks: ['copy:resource']
 
     connect:
       server:
@@ -102,7 +135,9 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask 'static', [
-    'copy:build'
+    'copy:js'
+    'copy:css'
+    'copy:html'
     'copy:resource'
   ]
 
