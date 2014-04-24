@@ -18,7 +18,7 @@ module.exports = (grunt) ->
         options:
           pretty: true
           data: (dest, src) ->
-            require './' + path.dirname(src) + '/locals.json'
+            require path.join __dirname, path.dirname(src), 'locals.json'
         files: [{
           expand: true
           cwd: 'examples/'
