@@ -62,9 +62,6 @@ module.exports = (grunt) ->
           ]
           dest: 'build/'
           rename: (dest, src) ->
-            console.log dest
-            console.log src
-            console.log path.normalize(path.join(dest, src.replace(/res/g, '')))
             path.normalize(path.join(dest, src.replace(/res/g, '')))
           }]
 
