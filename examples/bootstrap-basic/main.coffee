@@ -1,16 +1,17 @@
 $ () ->
   map = null
 
-  initialize (canvasElem, options) ->
+  initialize = (canvasElem, options) ->
     map = new google.maps.Map canvasElem, options
 
     $(window).resize onPageResize
     onPageResize()
 
   # Reflow the map
-  onPageResize (ratio) ->
+  onPageResize = (ratio) ->
     # Set defaults
-    if (typeof(ratio) == "undefined") ratio = 1.30
+    if typeof(ratio) == "undefined"
+      ratio = 1.30
 
     # Use the inverse ratio of the panel width.
     canvas.height(panel.outerWidth() * (1 / ratio))

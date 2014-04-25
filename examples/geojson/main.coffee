@@ -3,33 +3,9 @@ $ () ->
 
   initialize = (canvasElem, options) ->
     map = new google.maps.Map canvasElem, options
-    $(window).resize(onPageResize)
-    onPageResize()
-
-  # Reflow the map
-  onPageResize = (ratio) ->
-    # Set defaults
-    ratio = 1.30 unless ratio?
-
-    # Use the inverse ratio of the panel width.
-    canvas.height panel.outerWidth() * (1 / ratio)
-
-
-  emitPanelItem = (parent, title, body, id) ->
-    """
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <a href="##{ id }" class="panel-title collapsed" data-toggle="collapse" data-parent="##{ parent }">
-          #{ title }
-        </a>
-      </div>
-    </div>
-    <div class="panel-collapse collapse" id="#{ id }">
-      <div class="panel-body">
-        #{ body }
-      </div>
-    </div>
-    """
+    $(window).resize () ->
+      onPageResize canvasElem
+    $(window).trigger "resize"
 
   loadMapData = (url) ->
     p = $.getJSON url
@@ -45,8 +21,11 @@ $ () ->
             """, ++id for feature in geojson.features)
 
       zoom map
-      ;
     )
+
+  # Reflow the map
+  onPageResize = () ->
+    canvas.height calculateRatio panel.width()
 
   canvas = $ "#map-canvas"
   panel = $ "#map-panel"
@@ -57,4 +36,3 @@ $ () ->
   }
 
   loadMapData "/ajax/geo.json"
-
