@@ -16,8 +16,8 @@ $ () ->
 
       $("#map-panel-items").html (emitPanelItem "map-panel-items", feature.properties.name, """
             Type: #{ feature.geometry.type }<br>
-            Latitude: #{ Math.round feature.geometry.coordinates[0], 3 }<br>
-            Longitude: #{ Math.round feature.geometry.coordinates[1], 3 }<br>
+            Longitude: #{ Math.round feature.geometry.coordinates[0], 3 }<br>
+            Latitude: #{ Math.round feature.geometry.coordinates[1], 3 }<br>
             """, ++id for feature in geojson.features)
 
       zoom map
