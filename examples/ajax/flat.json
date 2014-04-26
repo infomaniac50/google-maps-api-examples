@@ -1,34 +1,34 @@
 [
 {
   "title": "Engage Mobility",
-  "coordinates": [
-    -94.68578696250916,
-    39.188144126224024
-  ],
+  "coordinates": {
+    "longitude": -94.68578696250916,
+    "latitude": 39.188144126224024
+  },
   "content": "<strong>HTML</strong> is allowed."
 },
 {
   "title": "Glen's Automotive",
-  "coordinates": [
-    -94.68269437551498,
-    39.19058472868688
-  ],
+  "coordinates": {
+    "longitude": -94.68269437551498,
+    "latitude": 39.19058472868688
+  },
   "content": "<strong>HTML</strong> is allowed."
 },
 {
   "title": "Jimmy Johns",
-  "coordinates": [
-    -94.68352854251862,
-    39.21052630508178
-  ],
+  "coordinates": {
+    "longitude": -94.68352854251862,
+    "latitude": 39.21052630508178
+  },
   "content": "<strong>HTML</strong> is allowed."
 },
 {
   "title": "Price Chopper",
-  "coordinates": [
-    -94.68593180179596,
-    39.20933337852434
-  ],
+  "coordinates": {
+    "longitude": -94.68593180179596,
+    "latitude": 39.20933337852434
+  },
   "content": "<strong>HTML</strong> is allowed."
 }
 ]

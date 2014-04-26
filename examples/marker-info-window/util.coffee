@@ -47,3 +47,18 @@ emitPanelItem = (parent, title, body, id) ->
     </div>
   </div>
   """
+
+infoMarker = (title, content, coordinates) ->
+  marker = new google.maps.Marker {
+    position: coordinates
+    title: title
+  }
+
+  google.maps.event.addListener marker, "click", () ->
+    info = new google.maps.InfoWindow {
+      content: content
+    }
+
+    info.open(marker.getMap(), marker)
+
+  marker

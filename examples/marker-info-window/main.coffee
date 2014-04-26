@@ -1,5 +1,6 @@
 $ () ->
   map = null
+  markers = null
 
   initialize = (canvasElem, options) ->
     map = new google.maps.Map canvasElem, options
@@ -10,17 +11,19 @@ $ () ->
   loadMapData = (url) ->
     p = $.getJSON url
 
-    p.done((geojson) ->
-      map.data.addGeoJson geojson
-      id = 0
+    p.done((flatjson) ->
+      markers = []
 
-      $("#map-panel-items").html (emitPanelItem "map-panel-items", feature.properties.name, """
-            Type: #{ feature.geometry.type }<br>
-            Latitude: #{ Math.round feature.geometry.coordinates[0], 3 }<br>
-            Longitude: #{ Math.round feature.geometry.coordinates[1], 3 }<br>
-            """, ++id for feature in geojson.features)
+      bounds = new google.maps.LatLngBounds
 
-      zoom map
+      for feature in flatjson
+        coordinates = new google.maps.LatLng feature.coordinates.latitude, feature.coordinates.longitude
+        marker = infoMarker feature.title, feature.content, coordinates
+        marker.setMap map
+        markers.push marker
+        processPoints coordinates, bounds.extend, bounds
+
+      map.fitBounds bounds
     )
 
   # Reflow the map
@@ -35,4 +38,4 @@ $ () ->
     # center: new google.maps.LatLng(39.188,-94.685)
   }
 
-  loadMapData "/ajax/geo.json"
+  loadMapData "/ajax/flat.json"
