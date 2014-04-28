@@ -11,7 +11,7 @@ $ () ->
   loadMapData = (url) ->
     p = $.getJSON url
 
-    p.done((flatjson) ->
+    p.done (flatjson) ->
       markers = []
 
       bounds = new google.maps.LatLngBounds
@@ -24,7 +24,7 @@ $ () ->
         processPoints coordinates, bounds.extend, bounds
 
       map.fitBounds bounds
-    )
+
 
   # Reflow the map
   onPageResize = () ->
