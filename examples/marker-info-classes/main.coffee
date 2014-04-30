@@ -33,29 +33,35 @@ class MapMaker
     # Use the inverse ratio of the panel width.
     width * (1 / ratio)
 
+  zoomFit: ->
+    bounds = new google.maps.LatLngBounds
+
+    for marker in @markers.markers
+      @processPoints marker.getPosition(), bounds.extend, bounds
+    @map.fitBounds bounds
+
+
 class MarkerCollection
   constructor: (@map) ->
-    @_markers = []
+    @markers = []
 
-  add: (coordinates, title) ->
+  add: (coordinates, title, content) ->
     marker = new google.maps.Marker
       position: coordinates
       map: @map
-      title: title
-    @_markers.push marker
-    marker
+      title: title ? ""
+    @markers.push marker
+    if content?
+      google.maps.event.addListener marker, "click", () =>
+        info = new google.maps.InfoWindow
+          content: content
+
+        info.open @map, marker
+
   clear: ->
-    for marker in @_markers
+    for marker in @markers
       marker.setMap null
       marker = null
-  info: (content, marker) ->
-    google.maps.event.addListener marker, "click", () =>
-      info = new google.maps.InfoWindow
-        content: content
-
-      info.open @map, marker
-
-
 
 $ () ->
   canvas = $ "#map-canvas"
@@ -70,13 +76,11 @@ $ () ->
 
   p.done (flatjson) =>
     map.markers.clear()
-    bounds = new google.maps.LatLngBounds
 
     for feature in flatjson
       coordinates = new google.maps.LatLng feature.coordinates.latitude, feature.coordinates.longitude
-      marker = map.markers.add coordinates, feature.title
-      map.markers.info feature.content, marker
-      map.processPoints coordinates, bounds.extend, bounds
+      marker = map.markers.add coordinates, feature.title, feature.content
 
-    map.map.fitBounds bounds
+    map.zoomFit()
+
 
