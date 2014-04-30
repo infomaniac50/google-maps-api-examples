@@ -87,7 +87,6 @@ module.exports = (grunt) ->
       jade:
         files: [
           'examples/**/*.jade'
-          'examples/**/*.coffee'
         ]
         tasks: ['jade:compile']
       coffee:
