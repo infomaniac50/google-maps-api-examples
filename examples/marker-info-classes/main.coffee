@@ -4,13 +4,15 @@ class MapMaker
     @map = new google.maps.Map canvasElem, options
     @markers = new MarkerCollection @map
     $(window).resize =>
-      @onPageResize()
+      @resize()
     $(window).trigger "resize"
 
 
   # Reflow the map
-  onPageResize: ->
-    @canvas.height @calculateRatio @canvas.width()
+  resize: (ratio = 1.30) ->
+    height = @canvas.width() * (1 / ratio)
+    # Use the inverse ratio of the panel width.
+    @canvas.height(height)
 
   ###
   Process each point in a Geometry, regardless of how deep the points may lie.
@@ -29,17 +31,12 @@ class MapMaker
       geometry.getArray().forEach (g) ->
         processPoints g, callback, thisArg
 
-  calculateRatio: (width, ratio = 1.30) ->
-    # Use the inverse ratio of the panel width.
-    width * (1 / ratio)
-
   zoomFit: ->
     bounds = new google.maps.LatLngBounds
 
     for marker in @markers.markers
       @processPoints marker.getPosition(), bounds.extend, bounds
     @map.fitBounds bounds
-
 
 class MarkerCollection
   constructor: (@map) ->
